@@ -16,13 +16,21 @@ Including another URLconf
 
 from django.conf.urls import url
 from django.contrib import admin
-from . import view
+from . import view,dbrequest
 
 urlpatterns = [
-    # url(r'^admin/', admin.site.urls),
+    url(r'^admin/', admin.site.urls),
     url(r'^home$', view.home),
     url(r'^login$', view.login),
-    url(r'^regist$', view.regist),
-    url(r'^regist_result$', view.regist_result),
-    url(r'^login_result$', view.login_result),
+    url(r'^regist_1$', view.regist),
+    url(r'^regist_2$', view.regist_choose),
+    url(r'^regist_tourist$', dbrequest.regist_tourist),
+    url(r'^regist_company$', dbrequest.regist_company),
+    url(r'^regist_administrator$', dbrequest.regist_administrator),
+    url(r'^login_result$', dbrequest.login_result),
+    url(r'^add_viewspot$', view.add_viewspot),
+    url(r'^add_viewspot_result$', dbrequest.add_viewspot_result),
+    url(r'^viewspot$', dbrequest.viewspot),
+    url(r'^(?P<id>\d+)/$',dbrequest.detail,name='viewspot_detail'),
+    url(r'^viewspot_search$', dbrequest.viewspot_search),
 ]

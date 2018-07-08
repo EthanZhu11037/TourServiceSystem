@@ -8,11 +8,13 @@
     <h1>登录</h1>
     <form action="/login_result" method="post">
         {% csrf_token %}
-        <h3>用户名</h3>
-        <input type="text" name="user_name">
-        <h3>密码</h3>
-        <input type="text" name="password">
+        用户类型&emsp;<input type="radio" name="user_type" value="tourist">游客
+        <input type="radio" name="user_type" value="company">旅游公司人员
+        <input type="radio" name="user_type" value="administrator">旅游局工作人员<br>
+        用户名&emsp;&emsp;<input type="text" name="user_name"><br>
+        密码&emsp;&emsp;&emsp;<input type="text" name="password"><br>
         <input type="submit" value="登录">
     </form>
+    <p>{{ rlt }}</p>
 </body>
 </html>

@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>旅游局注册</title>
+</head>
+<body>
+    <h1>旅游局注册</h1>
+    <form action="/regist_administrator" method="post">
+        {% csrf_token %}
+        用户名&emsp;&emsp;<input type="text" name="user_name"><br>
+        密码&emsp;&emsp;&emsp;<input type="password" name="password"><br>
+        <input type="submit" value="注册">
+    </form>
+    <p>{{ rlt }}</p>
+</body>
+</html>
