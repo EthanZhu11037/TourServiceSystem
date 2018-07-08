@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>编辑景点</title>
+</head>
+<body>
+    <h1>编辑景点</h1>
+    <form action="/edit_viewspot_result" method="post">
+        {% csrf_token %}
+        <h4>景点编号</h4><br>
+        <textarea rows="1" cols="30" name="id" readonly>{{ viewspot.id }}</textarea><br>
+        <h4>景点名称</h4><br>
+        <textarea rows="2" cols="30" name="name">{{ viewspot.name }}</textarea><br>
+        <h4>地址</h4><br>
+        <textarea rows="2" cols="30" name="address">{{ viewspot.address }}</textarea><br>
+        <h4>景点简介</h4><br>
+        <textarea rows="4" cols="30" name="introduction">{{ viewspot.introduction }}</textarea><br>
+        <h4>开放时间</h4><br>
+        <textarea rows="2" cols="30" name="time">{{ viewspot.time }}</textarea><br>
+        <h4>门票价格</h4><br>
+        <textarea rows="2" cols="30" name="price">{{ viewspot.price }}</textarea><br>
+        <input type="submit" value="提交">
+    </form>
+</body>
+</html>

@@ -88,12 +88,12 @@ def viewspot(request):
     viewspot_list = ViewSpot.objects.all()
     return render(request, 'viewspot.html', {'viewspot_list': viewspot_list})
 
-def detail(request,id):
+def detail(request, id):
     try:
         viewspot = ViewSpot.objects.get(id=id)
     except viewspot.DoesNotExist:
         raise Http404
-    return render(request, 'viewspot_detail.html', locals())
+    return render(request, 'viewspot_detail.html', {'viewspot': viewspot})
 
 def viewspot_search(request):
     request.encoding = 'utf-8'
@@ -105,3 +105,32 @@ def viewspot_search(request):
         return HttpResponse("<p>无搜索结果</p>")
     else:
         return render(request, 'viewspot_search.html', {'viewspot_result': viewspot_result})
+
+def edit_viewspot(request, id):
+    try:
+        viewspot = ViewSpot.objects.get(id=id)
+    except viewspot.DoesNotExist:
+        raise Http404
+    return render(request, 'edit_viewspot.html', {'viewspot': viewspot})
+
+def edit_viewspot_result(request):
+    request.encoding = 'utf-8'
+    name = request.POST['name']
+    address = request.POST['address']
+    introduction = request.POST['introduction']
+    time = request.POST['time']
+    price = request.POST['price']
+    id = request.POST['id']
+
+    try:
+        item = ViewSpot.objects.get(id=id)
+    except ViewSpot.DoesNotExist:
+        return HttpResponse("<p>编辑的景点不存在</p>")
+    else:
+        item.name = name
+        item.address = address
+        item.introduction = introduction
+        item.time = time
+        item.price = price
+        item.save()
+        return HttpResponse("<p>编辑景点成功</p>")
