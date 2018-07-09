@@ -38,5 +38,19 @@ class Hotel(models.Model):
     name = models.CharField(max_length=100)
     address = models.CharField(max_length=200)
 
+class Route(models.Model):
+    company_num = models.CharField(max_length=5)#公司编号
+    route_num = models.CharField(max_length=5)#公司路线编号
+    stand_type = models.CharField(max_length=5)#节点类型
+    stand_num = models.CharField(max_length=5)#节点编号
+    # sequence = models.IntegerField()#节点顺序
+    price = models.IntegerField()#路线价格
+    time = models.DateTimeField()#游览时间
+
+class ViewAppointment(models.Model):
+    viewspot_num = models.CharField(max_length=5)
+    time = models.DateTimeField()
+    people = models.IntegerField()
+
 '''
 '''

@@ -84,19 +84,6 @@ def add_viewspot_result(request):
     else:
         return HttpResponse("<p>该景点已存在</p>")
 
-def viewspot_edit3(request):
-    request.encoding = 'utf-8'
-    name = request.POST['name']
-    address = request.POST['address']
-    introduction = request.POST['introduction']
-    time = request.POST['time']
-    price = request.POST['price']
-
-    ViewSpot.objects.get(name=name)
-    ViewSpot.objects.filter(name=name).update(name=name, address=address, introduction=introduction, time=time, price=price)
-    return HttpResponse("<p>修改景点成功</p>")
-
-
 def viewspot(request):
     viewspot_list = ViewSpot.objects.all()
     return render(request, 'viewspot.html', {'viewspot_list': viewspot_list})
@@ -108,6 +95,18 @@ def viewspot_edit1(request):
 def viewspot_edit2(request, id):
     viewspot = ViewSpot.objects.get(id=id)
     return render(request, 'viewspot_edit2.html', {'viewspot': viewspot})
+
+def viewspot_edit3(request):
+    request.encoding = 'utf-8'
+    name = request.POST['name']
+    address = request.POST['address']
+    introduction = request.POST['introduction']
+    time = request.POST['time']
+    price = request.POST['price']
+
+    ViewSpot.objects.get(name=name)
+    ViewSpot.objects.filter(name=name).update(name=name, address=address, introduction=introduction, time=time, price=price)
+    return HttpResponse("<p>修改景点成功</p>")
 
 def viewspot_delete(request):
     viewspot_list = ViewSpot.objects.all()
@@ -135,3 +134,37 @@ def viewspot_search(request):
         return HttpResponse("<p>无搜索结果</p>")
     else:
         return render(request, 'viewspot_search.html', {'viewspot_result': viewspot_result})
+
+def add_route2(request):
+    request.encoding = 'utf-8'
+    company_num = request.POST['company_num']
+    route_num = request.POST['route_num']
+    stand_type = request.POST['stand_type']
+
+    if stand_type == '1':
+        stand_list = ViewSpot.objects.all()
+    elif stand_type == '2':
+        stand_list = Restaurant.objects.all()
+    elif stand_type == '3':
+        stand_list = Hotel.objects.all()
+    else:
+        return HttpResponse("<p>站点类型有误</p>")
+
+    return render(request, 'add_route2.html', {'company_num': company_num, 'route_num': route_num, 'stand_type': stand_type, 'stand_list': stand_list})
+
+def add_route3(request):
+    request.encoding = 'utf-8'
+    company_num = request.POST['company_num']
+    route_num = request.POST['route_num']
+    stand_type = request.POST['stand_type']
+    stand_num = request.POST['stand_num']
+    price = request.POST['price']
+    time = request.POST['time']
+
+    # try:
+    #     Route.objects.get(company_num=company_num, route_num=route_num)
+    # except Route.DoesNotExist:
+    route = Route(company_num=company_num, route_num=route_num, stand_type=stand_type, stand_num=stand_num,
+                        price=price, time=time)
+    route.save()
+    return HttpResponse("<p>添加路线节点成功</p>")

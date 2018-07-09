@@ -38,4 +38,7 @@ urlpatterns = [
     url(r'^viewspot_delete_result/(?P<id>\d+)$', dbrequest.viewspot_delete_result, name='viewspot_delete_result'),
     url(r'^(?P<id>\d+)/$',dbrequest.detail,name='viewspot_detail'),
     url(r'^viewspot_search$', dbrequest.viewspot_search),
+    url(r'^add_route1$', view.add_route1),
+    url(r'^add_route2$', dbrequest.add_route2),
+    url(r'^add_route3$', dbrequest.add_route3),
 ]

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>添加路线</title>
+</head>
+<body>
+    <h1>添加路线</h1>
+    <form action="/add_route3" method="post">
+        {% csrf_token %}
+        <h4>公司编号</h4><br>
+        <textarea rows="1" cols="30" name="company_num" readonly>{{ company_num }}</textarea><br>
+        <h4>路线编号</h4><br>
+        <textarea rows="1" cols="30" name="route_num" readonly>{{ route_num }}</textarea><br>
+        <h4>添加类型</h4><br>
+        <textarea rows="1" cols="30" name="stand_type" readonly>{{ stand_type }}</textarea><br>
+
+        {% for stand in stand_list %}
+        <p>{{ stand.name }}&emsp;&emsp;&emsp;{{ stand.id }}</p>
+        {% endfor %}
+
+        <h4>添加站点编号</h4><br>
+        <textarea rows="1" cols="30" name="stand_num"></textarea><br>
+        <h4>价格</h4><br>
+        <textarea rows="1" cols="30" name="price"></textarea><br>
+        <h4>时间</h4><br>
+        <textarea rows="1" cols="30" name="time"></textarea><br>
+        <input type="submit" value="提交">
+    </form>
+    <p>{{ rlt }}</p>
+</body>
+</html>

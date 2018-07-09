@@ -25,3 +25,6 @@ def regist_choose(request):
 
 def add_viewspot(request):
     return render(request, 'add_viewspot.html')
+
+def add_route1(request):
+    return render(request, 'add_route1.html')

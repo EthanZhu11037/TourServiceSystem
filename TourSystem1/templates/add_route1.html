@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>添加路线</title>
+</head>
+<body>
+    <h1>添加路线</h1>
+    <form action="/add_route2" method="post">
+        {% csrf_token %}
+        <h4>公司编号</h4><br>
+        <textarea rows="2" cols="30" name="company_num"></textarea><br>
+        <h4>路线编号</h4><br>
+        <textarea rows="2" cols="30" name="route_num"></textarea><br>
+        添加类型<input type="radio" name="stand_type" value="1">景点
+        <input type="radio" name="stand_type" value="2">餐厅
+        <input type="radio" name="stand_type" value="3">酒店<br>
+        <input type="submit" value="下一步">
+    </form>
+    <p>{{ rlt }}</p>
+</body>
+</html>
