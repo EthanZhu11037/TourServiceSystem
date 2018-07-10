@@ -63,6 +63,7 @@ body{
 .rectangle1{
 	margin:0;
 	padding-top:2%;
+	opacity:0.8;
 	background-color:#E0AD61;
 	height: 15%;
 	width: 100%;
