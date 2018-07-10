@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		{% load staticfiles %}
+		<link rel="stylesheet" href="{% static 'css/addroute.css' %}" type="text/css" />
+		<title>编辑景点</title>
+	</head>
+	<body>
+		<div class = "topmoudle"> 
+			<h1 class=p1>自助旅游系统</h1>
+
+			{% if user.is_authenticated %}
+			<form action="/logout" method="get">
+				<p class=username>{{ user.username }}</p>
+				<button class=p3 type="submit" style="background-color: #C0C0C0; color: #000000;">退出</button>
+			</form>
+			{% else %}
+			<form action="/login" method="get">
+				<button class=p2 type="submit" style="background-color: #C0C0C0; color: #000000;">登陆</button>
+			</form>
+			<form action="/regist" method="get">
+            	<button class=p3 type="submit" style="background-color: #C0C0C0; color: #000000;">注册</button>
+        	</form>
+			{% endif %}
+		</div>
+		<div class = "middlemoudle">
+			<div class="rectangle1">
+				欢迎来到自助旅游系统
+				<p class=p6>添加路线</p>
+			</div>
+			<div class="rectangle2">
+				<form action="/addroute/result" method="post">
+					{% csrf_token %}
+					<div style="position:absolute; left: 10%;">
+						{% for viewspot in viewspot_list %}
+							<p style="margin-top:30px;">{{ viewspot.name }}</p>
+						{% endfor %}
+					</div>
+
+					<div style="position:absolute; left: 40%;">
+						<p>公司名称</p><br>
+						<textarea rows="1" cols="30" name="company_name" style="resize:none" readonly>{{ user.username }}</textarea><br>
+						<p>路线编号</p><br>
+						<textarea rows="1" cols="30" name="route_num" style="resize:none"></textarea><br>
+						<p>景点数量</p><br>
+						<textarea rows="1" cols="30" name="stand_num" style="resize:none"></textarea><br>
+						<p>景点1名称</p><br>
+						<textarea rows="1" cols="30" name="stand_1_name" style="resize:none"></textarea><br>
+						<p>游览日期1</p><br>
+						<textarea rows="1" cols="30" name="date_1" style="resize:none"></textarea><br>
+						<p>景点2名称</p><br>
+						<textarea rows="1" cols="30" name="stand_2_name" style="resize:none"></textarea><br>
+						<p>游览日期2</p><br>
+						<textarea rows="1" cols="30" name="date_2" style="resize:none"></textarea><br>
+					</div>
+
+					<div style="position:absolute; left: 70%;">
+						<p>景点3名称</p><br>
+						<textarea rows="1" cols="30" name="stand_3_name" style="resize:none"></textarea><br>
+						<p>游览日期3</p><br>
+						<textarea rows="1" cols="30" name="date_3" style="resize:none"></textarea><br>
+						<p>景点4名称</p><br>
+						<textarea rows="1" cols="30" name="stand_4_name" style="resize:none"></textarea><br>
+						<p>游览日期4</p><br>
+        					<textarea rows="1" cols="30" name="date_4" style="resize:none"></textarea><br>
+						<p>路线价格</p><br>
+        					<textarea rows="1" cols="30" name="price" style="resize:none"></textarea><br>
+						<input type="submit" value="提交">
+					</div>
+				</form>
+				<p>{{ rlt }}</p>
+			</div>
+		</div>
+		<div class = "buttommoudle"> </div>
+	</body>
+</html>

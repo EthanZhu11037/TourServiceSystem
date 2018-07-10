@@ -3,18 +3,12 @@
 	<head>
 		<meta charset="utf-8" />
 		{% load staticfiles %}
-		<link rel="stylesheet" href="{% static 'css/home.css' %}" type="text/css" />
-		<title>旅游自助系统</title>
+		<link rel="stylesheet" href="{% static 'css/route.css' %}" type="text/css" />
+		<title>自助旅游系统</title>
 	</head>
-
 	<body>
 		<div class = "topmoudle"> 
 			<h1 class=p1>自助旅游系统</h1>
-			<!--开发用便捷按钮-->
-			<form action="/view" method="get">
-				<button class=code type="submit" style="background-color: #C0C0C0; color: #000000;">点我</button>
-			</form>
-			<!--开发用便捷按钮	-->
 			{% if user.is_authenticated %}
 			<form action="/logout" method="get">
 				<p class=username>{{ user.username }}</p>
@@ -29,22 +23,31 @@
         	</form>
 			{% endif %}
 		</div>
-
 		<div class = "middlemoudle">
 			<div class="rectangle1">
-				<h1 class=p4>欢迎来到自助旅游系统</h1>
+				欢迎来到自助旅游系统
+				<p class=p6>公司路线一览</p>
 			</div>
-			{% if user.is_authenticated %}
-			{% else %}
-			<h3>更多精彩请</h3>
+
 			<div class="rectangle2">
-				<form action="/login" method="get">
-					<button type="submit" style="background-color: #C0C0C0; color: #000000;">登录</button>
+				<form action="/addroute" method="get">
+					{% csrf_token %}
+					<input type="submit" value="添加路线" style="width:10%; height:40px; line-height:4%;">
 				</form>
 			</div>
-			{% endif %}
-		</div>
 
+			<div>
+				<p style="margin-top:30px;">
+					路线编号&emsp;&emsp;起始时间&emsp;&emsp;终止时间&emsp;&emsp;路线价格
+				</p>
+				{% for route in route_list %}
+					<p style="margin-top:30px;">
+					{{ route.route_num }}&emsp;&emsp;{{ route.date_1 }}&emsp;&emsp;{{ route.end_date }}&emsp;&emsp;{{ route.price }}
+					</p>
+				{% endfor %}
+			</div>
+
+		</div>
 		<div class = "buttommoudle"> </div>
 	</body>
 </html>

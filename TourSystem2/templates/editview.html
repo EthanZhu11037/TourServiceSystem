@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		{% load staticfiles %}
+		<link rel="stylesheet" href="{% static 'css/editview.css' %}" type="text/css" />
+		<title>编辑景点</title>
+	</head>
+	<body>
+		<div class = "topmoudle"> 
+			<h1 class=p1>自助旅游系统</h1>
+
+			{% if user.is_authenticated %}
+			<form action="/logout" method="get">
+				<p class=username>{{ user.username }}</p>
+				<button class=p3 type="submit" style="background-color: #C0C0C0; color: #000000;">退出</button>
+			</form>
+			{% else %}
+			<form action="/login" method="get">
+				<button class=p2 type="submit" style="background-color: #C0C0C0; color: #000000;">登陆</button>
+			</form>
+			<form action="/regist" method="get">
+            	<button class=p3 type="submit" style="background-color: #C0C0C0; color: #000000;">注册</button>
+        	</form>
+			{% endif %}
+		</div>
+		<div class = "middlemoudle">
+			<div class="rectangle1">
+				欢迎来到自助旅游系统
+				<p class=p6>编辑景点</p>
+			</div>
+				<div class="rectangle2">
+					<form action="view/edit/result" method="post">
+						{% csrf_token %}
+						<div style="position:absolute; left: 20%;">
+							<p>景点编号</p><br>
+        					<textarea rows="1" cols="30" name="id" style="resize:none" readonly>{{ view.id }}</textarea><br>
+        					<p>景点名称</p><br>
+        					<textarea rows="2" cols="30" name="name" style="resize:none">{{ view.name }}</textarea><br>
+        					<p>地址</p><br>
+        					<textarea rows="2" cols="30" name="address" style="resize:none">{{ view.address }}</textarea><br>
+        					<p>景点简介</p><br>
+        					<textarea rows="4" cols="30" name="intro" style="resize:none">{{ view.intro }}</textarea><br>
+						</div>
+
+        				<div style="position:absolute; left: 50%;">
+							<p>开放时间</p><br>
+        					<textarea rows="2" cols="30" name="time" style="resize:none">{{ view.time }}</textarea><br>
+        					<p>门票价格</p><br>
+        					<textarea rows="2" cols="30" name="price" style="resize:none">{{ view.price }}</textarea><br>
+        					<input type="submit" value="提交" style="margin-top:5%;">
+						</div>
+
+					</form>
+					<p>{{ rlt }}</p>
+				</div>
+		</div>
+		<div class = "buttommoudle"> </div>
+	</body>
+</html>
