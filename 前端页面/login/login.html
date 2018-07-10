@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<link rel="stylesheet" href="login.css" type="text/css" />
+		<title>自助旅游系统</title>
+	</head>
+	<body>
+		<div class = "topmoudle"> 
+			<h1 class=p1>自助旅游系统</h1>
+			<h5 class=p2>登陆</h5>
+			<h5 class=p3>注册</h5>
+		</div>
+		<div class = "middlemoudle">
+			<div class="rectangle1">
+				<div class="rectangle2">
+					<form action="#">
+						账号:<input type="text" name="FirstName" value="请输入您的账号"><br><br/>
+						密码:<input type="text" name="LastName" value="请输入您的密码"><br>
+						<input type="submit" value="登陆"><input type="submit" value="去注册">
+					</form>
+					<form action="#">
+						
+						<input type="radio" name="sex" id="male" value="male">		<!--..这里type name等根据后端参数改.-->
+						<label for="male">游客</label>
+						
+						<input type="radio" name="sex" id="female" value="female">
+						<label for="female">旅游公司</label>
+						
+						<input type="radio" name="sex" id="female" value="female">
+						<label for="female">旅游局</label>
+					</form>
+				</div>
+			</div>
+		</div>
+		<div class = "buttommoudle"> </div>
+	</body>
+</html>
