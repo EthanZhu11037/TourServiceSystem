@@ -18,9 +18,10 @@ body{
 
 .middlemoudle{
 	margin: 1% 1% 1% 1%;
+	padding:0;
 	height:81%;
 	width:98%;
-	background-color: #E0AD61;
+	background-color: #fff;
 	border-style:inset;
 	border-color:#D9D9D9;
 	opacity:0.6;
@@ -59,10 +60,20 @@ body{
 	color:#fff;
 }
 
-
+.rectangle1{
+	margin:0;
+	padding-top:2%;
+	background-color:#E0AD61;
+	height: 15%;
+	width: 100%;
+	font-size:250%;
+	font-weight:700;
+	color:white;
+	text-align: center;
+}
 
 .rectangle2{
-	margin-top:5%;
+	margin-top:1%;
 	margin-left:5%;
 	font-weight:700;
 	color:#fff;
@@ -72,13 +83,20 @@ body{
 .p4{
 	font-size:200%;
 	font-weight:700;		/*字体粗细*/
-	color:#fff;
+	color:#E0AD61;
 	float:left;
 }
 
 .p5{
 	font-size:150%;
 	font-weight:700;		/*字体粗细*/
-	color:#fff;
+	color:#E0AD61;
 	float:left;
+}
+
+.p6{
+	font-size:60%;
+	font-weight:300;
+	float:right;
+	margin-right:10%;
 }
