@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		{% load staticfiles %}
+		<link rel="stylesheet" href="{% static 'css/routedetail_tourist.css' %}" type="text/css" />
+		<title>景点信息</title>
+	</head>
+	<body>
+		<div class = "topmoudle"> 
+			<h1 class=p1>自助旅游系统</h1>
+
+			{% if user.is_authenticated %}
+			<form action="/logout" method="get">
+				<p class=username>{{ user.username }}</p>
+				<button class=p3 type="submit" style="background-color: #C0C0C0; color: #000000;">退出</button>
+			</form>
+			{% else %}
+			<form action="/login" method="get">
+				<button class=p2 type="submit" style="background-color: #C0C0C0; color: #000000;">登陆</button>
+			</form>
+			<form action="/regist" method="get">
+            	<button class=p3 type="submit" style="background-color: #C0C0C0; color: #000000;">注册</button>
+        	</form>
+			{% endif %}
+		</div>
+		<div class = "middlemoudle">
+			<div class="rectangle1">
+				欢迎来到自助旅游系统
+				<p class=p6>路线详细信息</p>
+			</div>
+
+			<div>
+				<p>{{ route.company_name }}&emsp;&emsp;{{ route.route_num }}</p><br>
+				<form action="/tourist/route" method="post">
+					{% csrf_token %}
+					<p>旅游公司名称：{{ route.company_name }}</p><br>
+					<p>路线编号：{{ route.route_num }}</p><br>
+					{% if route.stand_num == 1 %}
+						<p>景点1：{{ route.stand_1_name }}</p><br>
+						<p>游览时间：{{ route.date_1 }}</p><br>
+					{% endif %}
+					{% if route.stand_num == 2 %}
+						<p>景点1：{{ route.stand_1_name }}</p><br>
+						<p>游览时间：{{ route.date_1 }}</p><br>
+						<p>景点2：{{ route.stand_2_name }}</p><br>
+						<p>游览时间：{{ route.date_2 }}</p><br>
+					{% endif %}
+					{% if route.stand_num == 3 %}
+						<p>景点1：{{ route.stand_1_name }}</p><br>
+						<p>游览时间：{{ route.date_1 }}</p><br>
+						<p>景点2：{{ route.stand_2_name }}</p><br>
+						<p>游览时间：{{ route.date_2 }}</p><br>
+						<p>景点3：{{ route.stand_3_name }}</p><br>
+						<p>游览时间：{{ route.date_3 }}</p><br>
+					{% endif %}
+					{% if route.stand_num == 4 %}
+						<p>景点1：{{ route.stand_1_name }}</p><br>
+						<p>游览时间：{{ route.date_1 }}</p><br>
+						<p>景点2：{{ route.stand_2_name }}</p><br>
+						<p>游览时间：{{ route.date_2 }}</p><br>
+						<p>景点3：{{ route.stand_3_name }}</p><br>
+						<p>游览时间：{{ route.date_3 }}</p><br>
+						<p>景点4：{{ route.stand_4_name }}</p><br>
+						<p>游览时间：{{ route.date_4 }}</p><br>
+					{% endif %}
+					<p>起始时间：{{ route.date_1 }}</p><br>
+					<p>结束时间：{{ route.end }}</p><br>
+					<p>价格：&emsp;&emsp;¥{{ route.price }}</p><br>
+					<input type="submit" value="路线列表" style="width:6%; height:30px; line-height:6%; margin-left:25%;">
+				</form>
+				<p>{{ rlt }}</p>
+			</div>
+
+		</div>
+		<div class = "buttommoudle"></div>
+	</body>
+</html>

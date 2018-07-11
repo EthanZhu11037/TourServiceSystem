@@ -29,18 +29,18 @@ class ViewSpot(models.Model):
 class Route(models.Model):
     company_name = models.CharField(max_length=150)
     route_num = models.CharField(max_length=20)
-    stand_num = models.IntegerField(default=1)
-    stand_1_name = models.CharField(max_length=100)
-    date_1 = models.DateField(default="2000-1-1")
+    stand_num = models.IntegerField(default=0)
+    stand_1_name = models.CharField(max_length=100, null=True)
+    date_1 = models.DateField(null=True)
     stand_2_name = models.CharField(max_length=100, null=True)
-    date_2 = models.DateField(default="2000-1-1")
+    date_2 = models.DateField(null=True)
     stand_3_name = models.CharField(max_length=100, null=True)
-    date_3 = models.DateField(default="2000-1-1")
+    date_3 = models.DateField(null=True)
     stand_4_name = models.CharField(max_length=100, null=True)
-    date_4 = models.DateField(default="2000-1-1")
+    date_4 = models.DateField(null=True)
     person_num = models.IntegerField(default=0)
     price = models.FloatField(default=0.0)
-    end_date = models.DateField(default="2000-1-1")
+    end = models.DateField(null=True)
 
 class RouteAppointment(models.Model):
     company_name = models.CharField(max_length=150)
@@ -51,8 +51,3 @@ class ViewAppointment(models.Model):
     view_name = models.CharField(max_length=100)
     date = models.DateField()
     person_num = models.IntegerField(default=0)
-
-
-
-
-
