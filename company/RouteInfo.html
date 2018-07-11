@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+        <link rel="stylesheet" href="RouteInfo.css" type="text/css" />
+        <link rel="SHORTCUT ICON" href="favicon.ico"> 
+		<title>路线信息</title>
+	</head>
+	<body>
+		<div class = "topmoudle"> 
+				<img src="logo.jpg" z-index="1" align=left width="75" height="100%"/>
+				 <!--等待后端-->
+				<p style=" position:absolute;right:50px;top:5px;font-size:20px;font-weight:300;		 ">公司名</p>
+				 <!--等待后端-->
+			</div>
+		<div class = "middlemoudle">
+			<div class="rectangle1">
+			    <div class="route">路线 {{route.num}}</div>                  
+			</div>
+				<div class="rectangle2">
+						<div class="rectangle3">
+						     <!--等待后端-->	
+								
+								<span style="color:black;text-align:left">起始时间：&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</span>
+								<span style="color:black;text-align:left">结束时间：&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</span>                                        
+                                <span style="color:black;text-align:left">价格：{{route.price}}&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</span>
+                                <br><br><br><br><span><a href="JINGDIAN1" style=" font-size:150%; text-decoration:none; color:black">景点1&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp </a></span><br> 
+								<br>
+					        <!--等待后端-->   
+				       </div>
+						 <br><br>
+				  
+		</div>
+   
+        <div class="next">	
+                <!--等待后端-->
+                    <form action="">
+                           <input class="input1" type="button" value="修改路线" >
+                    </form>
+                <!--等待后端-->
+        </div>   
+	</body>
+</html>
