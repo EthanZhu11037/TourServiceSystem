@@ -4,15 +4,17 @@
 		<meta charset="utf-8" />
 		{% load staticfiles %}
 		<link rel="stylesheet" href="{% static 'css/route.css' %}" type="text/css" />
-		<title>自助旅游系统</title>
+        <link rel="SHORTCUT ICON" href="{% static "favicon.ico"%}">
+		<title>公司主页</title>
 	</head>
 	<body>
-		<div class = "topmoudle"> 
-			<h1 class=p1>自助旅游系统</h1>
+		<div class = "topmoudle">
+            {% load staticfiles %}
+			<img src= "{% static "logo.jpg" %}"  alt="picture" align=left width="75" height="100%"/>
 			{% if user.is_authenticated %}
 			<form action="/logout" method="get">
-				<p class=username>{{ user.username }}</p>
-				<button class=p3 type="submit" style="background-color: #C0C0C0; color: #000000;">退出</button>
+				<p class=username style=" position:absolute;right:50px;top:5px;font-size:20px;font-weight:300;">{{ user.username }}公司</p>
+				<button class=p3 type="submit" style="position: fixed;background:#339999;border-radius:5px;cursor: pointer;border: 3px solid #339999;bottom:12px;right: 20px;width: 100px;height: 55px;font-size: 20px;font-weight: 600;color: white;z-index=1">退出</button>
 			</form>
 			{% else %}
 			<form action="/login" method="get">
@@ -25,34 +27,35 @@
 		</div>
 		<div class = "middlemoudle">
 			<div class="rectangle1">
-				欢迎来到自助旅游系统
-				<p class=p6>公司路线一览</p>
+				<p class="route">路线</p>
 			</div>
 
 			<div class="rectangle2">
-				<form action="/addroute" method="get">
+                <div class="rectangle3">
+				      <p style="color:black;text-align:left">
+				     	路线编号&emsp;&emsp;&emsp;起始时间&emsp;&emsp;&emsp;&emsp;终止时间&emsp;&emsp;&emsp;&emsp;路线价格
+				      </p>
+				      {% for route in route_list %}
+					   <p style="margin-top:30px;">
+                           <a href="{% url 'route_detail' id=route.id %}" style="text-decoration:none; color:black">{{ route.route_num }}</a>&emsp;&emsp;&emsp;&emsp;&emsp;{{ route.date_1 }}&emsp;&emsp;&emsp;{{ route.end }}&emsp;&emsp;&emsp;{{ route.price }}
+                           {% if user.is_company == True %}
+
+							<a href="{% url 'edit_route' id=route.id %}"style="text-decoration:none; color:black"> &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&emsp;修改信息</a>
+							<a href="{% url 'delete_route' id=route.id %}"style="text-decoration:none; color:black"> &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp删除路线</a>
+						{% endif %}
+					   </p>
+				        {% endfor %}
+                </div>
+                    <br><br>
+                    <p style="font-size:300%;font-weight:700;color:black">在小旅上保存和分享你的路线</p>
+				    <form action="/addroute" method="get">
 					{% csrf_token %}
 					{% if user.is_company == True %}
-						<input type="submit" value="添加路线" style="width:10%; height:40px; line-height:4%;">
+						<input class="input1"type="submit" value="创建路线" >
 					{% endif %}
-				</form>
-			</div>
+				    </form>
 
-			<div>
-				<p style="margin-top:30px;">
-					路线编号&emsp;&emsp;起始时间&emsp;&emsp;终止时间&emsp;&emsp;路线价格
-				</p>
-				{% for route in route_list %}
-					<p style="margin-top:30px;">
-						<a href="{% url 'route_detail' id=route.id %}">{{ route.route_num }}</a>&emsp;&emsp;{{ route.date_1 }}&emsp;&emsp;{{ route.end }}&emsp;&emsp;{{ route.price }}
-						{% if user.is_company == True %}
-							<a href="{% url 'edit_route' id=route.id %}">修改信息</a>
-							<a href="{% url 'delete_route' id=route.id %}">删除路线</a>
-						{% endif %}
-					</p>
-				{% endfor %}
 			</div>
-		</div>
 		<div class = "buttommoudle"> </div>
 	</body>
 </html>
