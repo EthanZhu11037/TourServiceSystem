@@ -46,20 +46,95 @@ body{
 
 .p2{
 	position:absolute;
-	left: 83%;
-	top: 2.5%;
+	left: 75%;
+	top: 0.5%;
+	font-size:150%;
+	font-weight:500;		/*字体粗细*/
+	color:#fff;
+	text-decoration:underline;
+}
+.button1 {
+	position:absolute;
+	left: 80%;
+	top: 3.5%;
+	background-color: black; 
+	font-weight:700;
+	font-size:120%;
+	border: none;
+	color: white;
+	text-align: center;
+	border-radius:10px;
+}
+
+
+.rectangle2{
+	margin-top:1%;
+	margin-left:5%;
+	font-weight:700;
+	color:#fff;
+	line-height:20px;
+}
+
+.p4{
+	font-size:200%;
+	font-weight:700;		/*字体粗细*/
+	color:#E0AD61;
+	float:left;
+}
+
+.p5{
+	margin:0;
+	padding:0;
+	font-size:120%;
+	font-weight:700;		/*字体粗细*/
+	color:#E0AD61;
+	float:left;
+}
+
+.p6{
+	font-size:60%;
+	font-weight:300;
+	position:absolute;
+	top:15%;
+	right:20%;
+	
+}
+
+.username{
+	position:absolute;
+	left: 80%;
+	top: 1%;
 	font-weight:300;		/*字体粗细*/
 	color:#fff;
 }
 
-.p3{
+.button {
+	margin:2% 0 5% 5%;
+	padding: 5px 10px;
+    background-color: #E9B973; 
+	font-weight:700;
+	font-size:100%;
+    border: none;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+	border-radius:10px;
+	opacity:0.8;
+}
+
+.button2 {
 	position:absolute;
 	left: 85%;
-	top: 2.5%;
-	font-weight:300;		/*字体粗细*/
-	color:#fff;
+	top: 3.5%;
+	background-color: black; 
+	font-weight:700;
+	font-size:120%;
+	border: none;
+	color: white;
+	text-align: center;
+	border-radius:10px;
 }
-
 .rectangle1{
 	margin:0;
 	padding-top:1%;
@@ -71,41 +146,4 @@ body{
 	font-weight:700;
 	color:white;
 	text-align: center;
-}
-
-.rectangle2{
-	margin-top:1%;
-	margin-left:5%;
-	font-weight:700;
-	color:#fff;
-	line-height:10px;
-}
-
-.p4{
-	font-size:200%;
-	font-weight:700;		/*字体粗细*/
-	color:#E0AD61;
-	float:left;
-}
-
-.p5{
-	font-size:150%;
-	font-weight:700;		/*字体粗细*/
-	color:#E0AD61;
-	float:left;
-}
-
-.p6{
-	font-size:60%;
-	font-weight:300;
-	float:right;
-	margin-right:20%;
-}
-
-.username{
-	position:absolute;
-	left: 80%;
-	top: 1%;
-	font-weight:300;		/*字体粗细*/
-	color:#fff;
 }

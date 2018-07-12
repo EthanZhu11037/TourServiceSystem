@@ -9,7 +9,7 @@ body{
 }
 
 .topmoudle{
-	margin:0;
+	margin-top:0px;
 	width:100%;
 	height:10%;
 	background-color: black;
@@ -35,21 +35,6 @@ body{
 	opacity:0.8;
 }
 
-.p1{
-	margin:0;
-	padding-top:1%;
-	padding-left:1%;
-	color:#fff;
-	font-weight:700;		/*字体加粗*/
-}
-
-.p2{
-	position:absolute;
-	left: 80%;
-	top: 2.5%;
-	font-weight:300;		/*字体粗细*/
-	color:#fff;
-}
 
 .username{
 	position:absolute;
@@ -59,13 +44,6 @@ body{
 	color:#fff;
 }
 
-.p3{
-	position:absolute;
-	left: 85%;
-	top: 2.5%;
-	font-weight:300;		/*字体粗细*/
-	color:#fff;
-}
 
 .code{
 	position:absolute;
@@ -79,7 +57,7 @@ body{
     margin: 5% 30% 0%;
 	height:44%;
 	width:40%;
-	color: red;
+	color: white;
 	font-weight:700;
 	background-color: #E9B973;
 	opacity:0.5;
@@ -94,15 +72,103 @@ body{
 	font-weight:700;		/*字体加粗*/
 }
 
-.rectangle2{
-	margin: 1% 45% 0%;
-	padding:10px 0; 
-	height:11%;
-	width:10%;
-	color:red;
-	background-color: #E9B973;
-	opacity:0.5;
+
+
+.button {
+    background-color: #E9B973; 
+	font-weight:700;
+	font-size:200%;
+    border: none;
+    color: #FB6969;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
 	border-radius:10px;
-	text-align: center;
+	opacity:0.5;
 }
 
+.button1 {
+	position:absolute;
+	left: 80%;
+	top: 3.5%;
+	background-color: black; 
+	font-weight:700;
+	font-size:120%;
+	border: none;
+	color: white;
+	text-align: center;
+	border-radius:10px;
+}
+
+.button2 {
+	position:absolute;
+	left: 85%;
+	top: 3.5%;
+	background-color: black; 
+	font-weight:700;
+	font-size:120%;
+	border: none;
+	color: white;
+	text-align: center;
+	border-radius:10px;
+}
+
+ img{
+            width: 100%;
+        }
+
+        .li_img{
+            width: 800px;
+            float: left;
+            list-style: none;
+        }
+
+        .ul_img{
+            width: 6000px;
+            padding:0px;
+            margin: 0px;
+            transition: all 2s;
+
+        }
+
+        .main_div{
+            width: 800px;
+            overflow: hidden;
+            position: relative;
+            top: 100px;
+            left: 350px;
+        }
+
+        .arrows{
+            z-index: 9999;
+            position: absolute;
+            padding-top: 230px;
+            width: 800px;
+        }
+
+        .arrows span{
+            font-size: 3em;
+            color: seashell;
+        }
+
+        .arrows span:hover {
+            /*变小手*/
+            cursor: pointer;
+            background-color: rgba(192, 192, 192, 0.29);
+        }
+
+        .div_btn{
+            float: left;
+            border-radius: 100px;
+            background-color: aquamarine;
+            width: 60px;
+            height: 10px;
+            margin-left: 10px;
+            margin-top: 130px;
+        }
+
+        .div_btn:hover{
+            background-color:aqua;
+
+        }
