@@ -29,7 +29,7 @@ def regist_result(request):
     if len(username) < 6:
         ctx['rlt'] = "用户名长度过短"
         return render(request, 'register.html', ctx)
-    if len(username) > 100:
+    if len(username) > 30:
         ctx['rlt'] = "用户名长度过长"
         return render(request, 'register.html', ctx)
     if len(password) < 6:
@@ -40,6 +40,9 @@ def regist_result(request):
         return render(request, 'register.html', ctx)
     if not username.isalpha() and not username.isalnum():
         ctx['rlt'] = "用户名有特殊字符"
+        return render(request, 'register.html', ctx)
+    if not password.isdigit():
+        ctx['rlt'] = "密码有非数字字符"
         return render(request, 'register.html', ctx)
 
     try:
