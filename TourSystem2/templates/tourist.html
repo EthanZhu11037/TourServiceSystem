@@ -11,15 +11,15 @@
 			<h1 class=p1>自助旅游系统</h1>
 			{% if user.is_authenticated %}
 			<form action="/logout" method="get">
-				<p class=username>{{ user.username }}</p>
-				<button class=p3 type="submit" style="background-color: #C0C0C0; color: #000000;">退出</button>
+				<p class=p2>{{ user.username }}</p>
+				<button class=button2 type="submit" >退出</button>
 			</form>
 			{% else %}
 			<form action="/login" method="get">
-				<button class=p2 type="submit" style="background-color: #C0C0C0; color: #000000;">登录</button>
+				<button class=button1 type="submit" >登录</button>
 			</form>
 			<form action="/regist" method="get">
-            	<button class=p3 type="submit" style="background-color: #C0C0C0; color: #000000;">注册</button>
+            	<button class=button2 type="submit" >注册</button>
         	</form>
 			{% endif %}
 		</div>
@@ -28,7 +28,7 @@
 				欢迎来到自助旅游系统	
 			</div>
 			<div class="rectangle3">
-				<a href="{% url 'tourist_view' %}">我想了解<br>单个景点</a>
+				<a class="p3" href="{% url 'tourist_view' %}">我想了解<br>单个景点</a>
 			</div>
 			<div class="rectangle3">
 				<a href="{% url 'tourist_route' %}">我想了解<br>整条线路</a>

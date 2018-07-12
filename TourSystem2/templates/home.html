@@ -5,6 +5,7 @@
 		{% load staticfiles %}
 		<link rel="stylesheet" href="{% static 'css/home.css' %}" type="text/css" />
 		<title>自助旅游系统</title>
+		
 	</head>
 
 	<body>
@@ -22,10 +23,10 @@
 			</form>
 			{% else %}
 			<form action="/login" method="get">
-				<button class=p2 type="submit" style="background-color: #C0C0C0; color: #000000;">登录</button>
+				<button class=button1 type="submit" >登录</button>
 			</form>
 			<form action="/regist" method="get">
-            	<button class=p3 type="submit" style="background-color: #C0C0C0; color: #000000;">注册</button>
+            	<button class=button2 type="submit" >注册</button>
         	</form>
 			{% endif %}
 		</div>
@@ -37,14 +38,16 @@
 			{% if user.is_authenticated %}
 			{% else %}
 			<h3>更多精彩请</h3>
-			<div class="rectangle2">
+			
 				<form action="/login" method="get">
-					<button type="submit" style="background-color: #C0C0C0; color: #000000;">登录</button>
+					<button class=button type="submit">登录</button>
 				</form>
-			</div>
+			
 			{% endif %}
 		</div>
-
+	
 		<div class = "buttommoudle"> </div>
+		
+		
 	</body>
 </html>

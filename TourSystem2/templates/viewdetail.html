@@ -12,15 +12,15 @@
 
 			{% if user.is_authenticated %}
 			<form action="/logout" method="get">
-				<p class=username>{{ user.username }}</p>
-				<button class=p3 type="submit" style="background-color: #C0C0C0; color: #000000;">退出</button>
+				<p class=p2>{{ user.username }}</p>
+				<button class=button2 type="submit" >退出</button>
 			</form>
 			{% else %}
 			<form action="/login" method="get">
-				<button class=p2 type="submit" style="background-color: #C0C0C0; color: #000000;">登陆</button>
+				<button class=button1 type="submit">登陆</button>
 			</form>
 			<form action="/regist" method="get">
-            	<button class=p3 type="submit" style="background-color: #C0C0C0; color: #000000;">注册</button>
+            	<button class=button2 type="submit" >注册</button>
         	</form>
 			{% endif %}
 		</div>
@@ -33,21 +33,27 @@
 			<div>
 				<form action="/view" method="post">
 					{% csrf_token %}
-					<p class=p5>景点名称：</p><p class=p5>{{ view.name }}</p><br><br><br><br><br><br>
-					<p class=p5>所在地址：</p><p class=p5>{{ view.address }}</p><br><br><br><br><br><br>
-					<p class=p5>详情简介：</p><p class=p5>{{ view.intro }}</p><br><br><br><br><br><br>
-					<p class=p5>开放时间：</p><p class=p5>{{ view.time }}</p><br><br><br><br><br><br>
-					<p class=p5>门票价格：¥</p><p class=p5>{{ view.price }}</p><br><br><br><br><br><br>
-					<input type="submit" value="景点列表" style="width:6%; height:30px; line-height:6%; margin-left:25%;">
+					<div class=rectangle2>
+						<p class=p5>景点名称：</p><p class=p5>{{ view.name }}</p><br><br>
+						<p class=p5>所在地址：</p><p class=p5>{{ view.address }}</p><br><br>
+						<p class=p5>详情简介：</p><p class=p5>{{ view.intro }}</p><br><br>
+						<p class=p5>开放时间：</p><p class=p5>{{ view.time }}</p><br><br>
+						<p class=p5>门票价格：¥</p><p class=p5>{{ view.price }}</p><br><br>						
+					</div>
+
+					<input class="button" type="submit" value="返回景点列表" >
 				</form>
-				<p>{{ rlt }}</p>
-				{% if user.is_adminis == True %}
-					<p>预约情况</p>
-					<p>日期&emsp;&emsp;预计人数</p>
-					{% for va in va_list %}
-						<p>{{ va.date }}&emsp;&emsp;{{ va.person_num }}</p>
-					{% endfor %}
-				{% endif %}
+				<div class=rectangle2>
+					<p>{{ rlt }}</p>
+					{% if user.is_adminis == True %}
+						<p class=p5>预约情况</p>
+						<p class=p5>日期&emsp;&emsp;预计人数</p>
+						{% for va in va_list %}
+							<p>{{ va.date }}&emsp;&emsp;{{ va.person_num }}</p>
+						{% endfor %}
+					{% endif %}
+				</div>
+				
 			</div>
 		</div>
 		<div class = "buttommoudle"></div>

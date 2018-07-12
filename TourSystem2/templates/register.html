@@ -11,26 +11,32 @@
 		<div class = "topmoudle"> 
 			<h1 class=p1>自助旅游系统</h1>
 			<form action="/login" method="get">
-            	<button class=p2 type="submit" style="background-color: #C0C0C0; color: #000000;">登录</button>
+				<button class=button1 type="submit" >登录</button> 
         	</form>
 			<form action="/regist" method="get">
-            	<button class=p3 type="submit" style="background-color: #C0C0C0; color: #000000;">注册</button>
+				<button class=button2 type="submit" >注册</button>
         	</form>
 		</div>
 		<div class = "middlemoudle">
 			<div class="rectangle1">
+				<div class="rectangle1p5">
+					<h3>用户注册</h3>
+				</div>
 				<div class="rectangle2">
 					<form action="/regist/result" method="post">
 						{% csrf_token %}
-						<h3>用户注册</h3>
-						账号:<input type="text" name="username"><br><br>
-						密码:<input type="text" name="password"><br><br>
+						账号:<input class="input" type="text" name="username" value="此处输入注册账号的要求"><br><br>
+						密码:<input class="input" type="text" name="password" value="此处输入密码的要求"><br><br>
 						用户类型:<input checked="true" type="radio" name="usertype" value="tourist">游客
         				<input type="radio" name="usertype" value="company">旅游公司人员
         				<input type="radio" name="usertype" value="adminis">旅游局人员<br><br><br>
-						<input type="submit" value="注册">
+						<div class="rectangle1p5">
+							<input class="button" type="submit" value="注册">
+						</div>
 					</form>
-					<p>{{ rlt }}</p>
+					<div class="rectangle1p5">
+						<p>{{ rlt }}</p>
+					</div>	
 				</div>
 			</div>
 		</div>
