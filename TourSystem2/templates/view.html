@@ -5,6 +5,8 @@
 		{% load staticfiles %}
 		<link rel="stylesheet" href="{% static 'css/view.css' %}" type="text/css" />
 		<title>景点一览</title>
+		
+		
 	</head>
 	<body>
 		<div class = "topmoudle"> 
@@ -42,16 +44,23 @@
 			</div>
 
 			<div class="rectangle3">
+				
+			
+			<table class="gridtable" margin-left="10%" width="50%" height="300px" border="3px"   id="tad">  
+				<tr><td>景点名称</td><td>是否修改</td><td>是否删除</td></tr>  
 				{% for viewspot in viewspot_list %}
-					<p style="margin-top:30px;">
-						<a href="{% url 'viewspot_detail' id=viewspot.id %}">{{ viewspot.name }}</a>
-						{% if user.is_adminis == True %}
-							<a href="{% url 'edit_view' id=viewspot.id %}">修改信息</a>
-							<a href="{% url 'delete_view' id=viewspot.id %}">删除景点</a>
-						{% endif %}
-					</p>
+				<tr>
+					<td><a href="{% url 'viewspot_detail' id=viewspot.id %}">{{ viewspot.name }}</a></td>
+					{% if user.is_adminis == True %}
+					<td><a href="{% url 'edit_view' id=viewspot.id %}">修改</a></td>
+					<td><a href="{% url 'delete_view' id=viewspot.id %}">删除</a></td>
+					{% endif %}
+				</tr>  
+				
 				{% endfor %}
+			</table>
 			</div>
+			
 			<div class="add">
 				<form action="/addview" method="get">
 					{% csrf_token %}
