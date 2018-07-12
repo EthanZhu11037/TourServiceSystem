@@ -4,79 +4,93 @@
 		<meta charset="utf-8" />
 		{% load staticfiles %}
 		<link rel="stylesheet" href="{% static 'css/routedetail.css' %}" type="text/css" />
-		<title>景点信息</title>
+		<link rel="SHORTCUT ICON" href="{% static "favicon.ico"%}">
+		<title>路线详细信息</title>
 	</head>
 	<body>
 		<div class = "topmoudle"> 
-			<h1 class=p1>自助旅游系统</h1>
+			{% load staticfiles %}
+			<img src= "{% static "logo.jpg" %}"  alt="picture" align=left width="75" height="100%"/>
 
 			{% if user.is_authenticated %}
 			<form action="/logout" method="get">
-				<p class=username>{{ user.username }}</p>
-				<button class=p3 type="submit" style="background-color: #C0C0C0; color: #000000;">退出</button>
+				<p class=username style=" position:absolute;right:150px;top:5px;font-size:20px;font-weight:300;">{{ user.username }}公司</p>
+				<div style="z-index:4"><button class=p3 type="submit"style="position: absolute;background:#339999;border-radius:5px;cursor: pointer;border: 3px solid #339999;top:8px;right: 10px;width: 100px;height: 55px;font-size: 20px;font-weight: 600;color: white;">退出</button></div>
 			</form>
 			{% else %}
 			<form action="/login" method="get">
-				<button class=p2 type="submit" style="background-color: #C0C0C0; color: #000000;">登陆</button>
+				<button class=p2 type="submit" style="position: absolute;background-color: white; color: black;border-radius:5px;border: 3px solid white; cursor:pointer;top:15px;right: 90px;font-size: 20px;font-weight: 600;">登陆</button>
 			</form>
 			<form action="/regist" method="get">
-            	<button class=p3 type="submit" style="background-color: #C0C0C0; color: #000000;">注册</button>
+            	<button class=p3 type="submit" style="position: absolute;background-color: white; color: black;border-radius:5px;border: 3px solid white; cursor:pointer;top:15px;right: 20px;font-size: 20px;font-weight: 600;">注册</button>
         	</form>
 			{% endif %}
 		</div>
 		<div class = "middlemoudle">
-			<div class="rectangle1">
-				欢迎来到自助旅游系统
-				<p class=p6>路线详细信息</p>
-			</div>
+              <div class="rectangle1">
+			    <div class="route">路线 {{route.route_num}}&emsp;&emsp;&emsp;&emsp;公司名：{{ route.company_name }}</div>
+			   </div>
 
-			<div>
-				<p>{{ route.company_name }}&emsp;&emsp;{{ route.route_num }}</p><br>
-				<form action="/route" method="post">
+
+              <div class="rectangle2">
+				  <div class="rectangle3">
+					  <div class="span">
+				     <form action="/route" method="post">
 					{% csrf_token %}
 					{% if route.stand_num == 1 %}
-						<p>景点1：{{ route.stand_1_name }}</p><br>
-						<p>游览时间：{{ route.date_1 }}</p><br>
+
+						<span style="color:black;text-align:left">景点1：{{ route.stand_1_name }}&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</span>
+						<span style="color:black;text-align:left">游览时间：{{ route.date_1 }}&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</span ><br><br><br><br><br><br>
 					{% endif %}
 					{% if route.stand_num == 2 %}
-						<p>景点1：{{ route.stand_1_name }}</p><br>
-						<p>游览时间：{{ route.date_1 }}</p><br>
-						<p>景点2：{{ route.stand_2_name }}</p><br>
-						<p>游览时间：{{ route.date_2 }}</p><br>
+						<span style="color:black;text-align:left">景点1：{{ route.stand_1_name }}</span>
+						<span style="color:black;text-align:left">游览时间：{{ route.date_1 }}</span><br><br><br>
+						<span style="color:black;text-align:left">景点2：{{ route.stand_2_name }}</span>
+						<span style="color:black;text-align:left">游览时间：{{ route.date_2 }}</span><br><br><br><br><br><br>
 					{% endif %}
 					{% if route.stand_num == 3 %}
-						<p>景点1：{{ route.stand_1_name }}</p><br>
-						<p>游览时间：{{ route.date_1 }}</p><br>
-						<p>景点2：{{ route.stand_2_name }}</p><br>
-						<p>游览时间：{{ route.date_2 }}</p><br>
-						<p>景点3：{{ route.stand_3_name }}</p><br>
-						<p>游览时间：{{ route.date_3 }}</p><br>
+						<span style="color:black;text-align:left">景点1：{{ route.stand_1_name }}</span>
+						<span style="color:black;text-align:left">游览时间：{{ route.date_1 }}</span><br><br><br>
+						<span style="color:black;text-align:left">景点2：{{ route.stand_2_name }}</span>
+						<span style="color:black;text-align:left">游览时间：{{ route.date_2 }}</span><br><br><br>
+						<span style="color:black;text-align:left">景点3：{{ route.stand_3_name }}</span>
+						<span style="color:black;text-align:left">游览时间：{{ route.date_3 }}</span><br><br><br><br><br><br>
 					{% endif %}
 					{% if route.stand_num == 4 %}
-						<p>景点1：{{ route.stand_1_name }}</p><br>
-						<p>游览时间：{{ route.date_1 }}</p><br>
-						<p>景点2：{{ route.stand_2_name }}</p><br>
-						<p>游览时间：{{ route.date_2 }}</p><br>
-						<p>景点3：{{ route.stand_3_name }}</p><br>
-						<p>游览时间：{{ route.date_3 }}</p><br>
-						<p>景点4：{{ route.stand_4_name }}</p><br>
-						<p>游览时间：{{ route.date_4 }}</p><br>
+						<span style="color:black;text-align:left">景点1：{{ route.stand_1_name }}</span>
+						<span style="color:black;text-align:left">游览时间：{{ route.date_1 }}</span><br><br><br>
+						<span style="color:black;text-align:left">景点2：{{ route.stand_2_name }}</span>
+						<span style="color:black;text-align:left">游览时间：{{ route.date_2 }}</span><br><br><br>
+						<span style="color:black;text-align:left">景点3：{{ route.stand_3_name }}</span>
+						<span style="color:black;text-align:left">游览时间：{{ route.date_3 }}</span><br><br><br>
+						<span style="color:black;text-align:left">景点4：{{ route.stand_4_name }}</span>
+						<span style="color:black;text-align:left">游览时间：{{ route.date_4 }}</span><br><br><br><br>
 					{% endif %}
-					<p>起始时间：{{ route.date_1 }}</p><br>
-					<p>结束时间：{{ route.end }}</p><br>
-					<p>价格：&emsp;&emsp;¥{{ route.price }}</p><br>
-					<input type="submit" value="路线列表" style="width:6%; height:30px; line-height:6%; margin-left:25%;">
+					<span>起始时间：{{ route.date_1 }}</span><br><br><br>
+					<span>结束时间：{{ route.end }}</span><br><br><br>
+					<span>价格：&emsp;&emsp;¥{{ route.price }}</span><br><br><br>
+
+
 				</form>
-				<p>{{ rlt }}</p>
+
 				{% if user.is_company == True %}
 					<p>预约情况</p>
 					{% for ra in ra_list %}
 						<p>{{ ra.tourist_name }}</p>
 					{% endfor %}
 				{% endif %}
+					  </div>
+				  </div>
+
 			</div>
 
+
+		<div class = "next">
+			<form action="/route" method="post">
+				{% csrf_token %}
+				<input class="input1" type="submit" value="路线列表" >
+			</form>
+
 		</div>
-		<div class = "buttommoudle"></div>
 	</body>
 </html>

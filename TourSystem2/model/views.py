@@ -112,6 +112,15 @@ def addview_result(request):
     if name == "":
         ctx['rlt'] = "景点名称不能为空"
         return render(request, 'addviewinfo.html', ctx)
+    if address == "":
+        ctx['rlt'] = "景点地址不能为空"
+        return render(request, 'addviewinfo.html', ctx)
+    if intro == "":
+        ctx['rlt'] = "景点简介不能为空"
+        return render(request, 'addviewinfo.html', ctx)
+    if time == "":
+        ctx['rlt'] = "开放时间不能为空"
+        return render(request, 'addviewinfo.html', ctx)
 
     if price == "":
         ctx['rlt'] = "门票价格不能为空  若无门票请填入 0"
@@ -165,6 +174,7 @@ def edit_view(request, id):
     return render(request, 'editview.html', {'view': view})
 
 def edit_view_result(request):
+    ctx = {}
     request.encoding = 'utf-8'
     id = request.POST['id']
     name = request.POST['name']
@@ -172,6 +182,37 @@ def edit_view_result(request):
     intro = request.POST['intro']
     time = request.POST['time']
     price = request.POST['price']
+
+    if name == "":
+        ctx['rlt'] = "景点名称不能为空"
+        return render(request, 'editview.html', ctx)
+
+    if price == "":
+        ctx['rlt'] = "门票价格不能为空  若无门票请填入 0"
+        return render(request, 'editview.html', ctx)
+    if address == "":
+        ctx['rlt'] = "景点地址不能为空"
+        return render(request, 'addviewinfo.html', ctx)
+    if intro == "":
+        ctx['rlt'] = "景点简介不能为空"
+        return render(request, 'addviewinfo.html', ctx)
+    if time == "":
+        ctx['rlt'] = "开放时间不能为空"
+        return render(request, 'addviewinfo.html', ctx)
+
+    try:
+        f = float(price)
+    except ValueError:
+        ctx['rlt'] = "门票价格输入格式有误"
+        return render(request, 'editview.html', ctx)
+    else:
+        if f < 0:
+            ctx['rlt'] = "门票价格为负数"
+            return render(request, 'editview.html', ctx)
+        f_test = round(f,2)
+        if f_test != f:
+            ctx['rlt'] = "门票价格精确度超过“分”"
+            return render(request, 'editview.html', ctx)
 
     ViewSpot.objects.filter(id=id).update(name=name, address=address, intro=intro, time=time, price=price)
 
@@ -181,7 +222,7 @@ def edit_view_result(request):
 def delete_view(request, id):
     ViewSpot.objects.filter(id=id).delete()
     viewspot_list = ViewSpot.objects.all()
-    # !!!!!!少提示!!!!!!
+    # !!!!!!少提示!!!!!!6
     return render(request, 'view.html', {'viewspot_list': viewspot_list})
 
 def route(request):
@@ -224,6 +265,31 @@ def addroute_result(request):
     if int(stand_num) < 1 or int(stand_num) > 4:
         ctx['rlt'] = "景点数量超出范围（1-4）"
         return render(request, 'addroute.html', ctx)
+
+    if stand_1_name != '':
+        try:
+            ViewSpot.objects.get(name=stand_1_name)
+        except ViewSpot.DoesNotExist:
+            ctx['rlt'] = "添加的景点不存在"
+            return render(request, 'addroute.html', ctx)
+    if stand_2_name != '':
+        try:
+            ViewSpot.objects.get(name=stand_2_name)
+        except ViewSpot.DoesNotExist:
+            ctx['rlt'] = "添加的景点不存在"
+            return render(request, 'addroute.html', ctx)
+    if stand_3_name != '':
+        try:
+            ViewSpot.objects.get(name=stand_3_name)
+        except ViewSpot.DoesNotExist:
+            ctx['rlt'] = "添加的景点不存在"
+            return render(request, 'addroute.html', ctx)
+    if stand_4_name != '':
+        try:
+            ViewSpot.objects.get(name=stand_4_name)
+        except ViewSpot.DoesNotExist:
+            ctx['rlt'] = "添加的景点不存在"
+            return render(request, 'addroute.html', ctx)
 
     if price == "":
         ctx['rlt'] = "路线价格不能为空  若免费请填入 0"
@@ -342,9 +408,11 @@ def make_appointment(request, id):
 
 def edit_route(request, id):
     route = Route.objects.get(id=id)
-    return render(request, 'editroute.html', {'route': route})
+    viewspot_list = ViewSpot.objects.all()
+    return render(request, 'editroute.html', {'route': route, 'viewspot_list': viewspot_list})
 
 def edit_route_result(request):
+    ctx = {}
     request.encoding = 'utf-8'
     id = request.POST['id']
     company_name = request.POST['company_name']
@@ -360,6 +428,62 @@ def edit_route_result(request):
     date_4 = request.POST['date_4']
     price = request.POST['price']
     end = request.POST['end']
+
+    if route_num == "":
+        ctx['rlt'] = "路线编号不能为空"
+        return render(request, 'editroute.html', ctx)
+
+    if stand_num == "":
+        ctx['rlt'] = "景点数量不能为空"
+        return render(request, 'editroute.html', ctx)
+    if not stand_num.isdigit():
+        ctx['rlt'] = "景点数量不是数字"
+        return render(request, 'editroute.html', ctx)
+    if int(stand_num) < 1 or int(stand_num) > 4:
+        ctx['rlt'] = "景点数量超出范围（1-4）"
+        return render(request, 'editroute.html', ctx)
+
+    if stand_1_name != '':
+        try:
+            ViewSpot.objects.get(name=stand_1_name)
+        except ViewSpot.DoesNotExist:
+            ctx['rlt'] = "添加的景点不存在"
+            return render(request, 'editroute.html', ctx)
+    if stand_2_name != '':
+        try:
+            ViewSpot.objects.get(name=stand_2_name)
+        except ViewSpot.DoesNotExist:
+            ctx['rlt'] = "添加的景点不存在"
+            return render(request, 'editroute.html', ctx)
+    if stand_3_name != '':
+        try:
+            ViewSpot.objects.get(name=stand_3_name)
+        except ViewSpot.DoesNotExist:
+            ctx['rlt'] = "添加的景点不存在"
+            return render(request, 'editroute.html', ctx)
+    if stand_4_name != '':
+        try:
+            ViewSpot.objects.get(name=stand_4_name)
+        except ViewSpot.DoesNotExist:
+            ctx['rlt'] = "添加的景点不存在"
+            return render(request, 'editroute.html', ctx)
+
+    if price == "":
+        ctx['rlt'] = "路线价格不能为空  若免费请填入 0"
+        return render(request, 'editroute.html', ctx)
+    try:
+        f = float(price)
+    except ValueError:
+        ctx['rlt'] = "路线价格输入格式有误"
+        return render(request, 'editroute.html', ctx)
+    else:
+        if f < 0:
+            ctx['rlt'] = "路线价格为负数"
+            return render(request, 'editroute.html', ctx)
+        f_test = round(f,2)
+        if f_test != f:
+            ctx['rlt'] = "路线价格精确度超过“分”"
+            return render(request, 'editroute.html', ctx)
 
     Route.objects.filter(id=id).update(route_num=route_num, stand_num=stand_num, stand_1_name=stand_1_name,
                                        date_1=date_1, stand_2_name=stand_2_name, date_2=date_2, stand_3_name=stand_3_name,

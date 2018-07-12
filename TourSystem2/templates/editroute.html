@@ -4,16 +4,17 @@
 		<meta charset="utf-8" />
 		{% load staticfiles %}
 		<link rel="stylesheet" href="{% static 'css/editroute.css' %}" type="text/css" />
-		<title>编辑景点</title>
+		<link rel="SHORTCUT ICON" href="{% static "favicon.ico"%}">
+		<title>编辑路线</title>
 	</head>
 	<body>
-		<div class = "topmoudle"> 
-			<h1 class=p1>自助旅游系统</h1>
-
+		<div class = "topmoudle"style="">
+			 {% load staticfiles %}
+			<img src= "{% static "logo.jpg" %}"  alt="picture" align=left width="75" height="100%"/>
 			{% if user.is_authenticated %}
 			<form action="/logout" method="get">
-				<p class=username>{{ user.username }}</p>
-				<button class=p3 type="submit" style="background-color: #C0C0C0; color: #000000;">退出</button>
+				<p class=username style=" position:absolute;right:50px;top:5px;font-size:20px;font-weight:300;">{{ user.username }}公司</p>
+				<button class=p3 type="submit" style="position: fixed;background:#339999;border-radius:5px;cursor: pointer;border: 3px solid #339999;bottom:12px;right: 20px;width: 100px;height: 55px;font-size: 20px;font-weight: 600;color: white;z-index=1">退出</button>
 			</form>
 			{% else %}
 			<form action="/login" method="get">
@@ -30,41 +31,50 @@
 				<p class=p6>编辑路线</p>
 			</div>
 				<div class="rectangle2">
+					   <div>
+						   <p style="font-size:45px;color:black;">在这里修改您的路线。</p>
+					   </div>
 					<form action="/route/edit/result" method="post">
 						{% csrf_token %}
-						<div style="position:absolute; left: 40%;">
-							<p>路线ID</p><br>
-        					<textarea rows="1" cols="30" name="id" style="resize:none" readonly>{{ route.id }}</textarea><br>
-        					<p>公司名称</p><br>
-        					<textarea rows="1" cols="30" name="company_name" style="resize:none" readonly>{{ route.company_name }}</textarea><br>
-        					<p>路线编号</p><br>
-        					<textarea rows="1" cols="30" name="route_num" style="resize:none">{{ route.route_num }}</textarea><br>
-							<p>景点数量</p><br>
-        					<textarea rows="1" cols="30" name="stand_num" style="resize:none">{{ route.stand_num }}</textarea><br>
-        					<p>景点1名称</p><br>
-        					<textarea rows="1" cols="30" name="stand_1_name" style="resize:none">{{ route.stand_1_name }}</textarea><br>
-							<p>游览日期1</p><br>
-        					<textarea rows="1" cols="30" name="date_1" style="resize:none">2000-1-1</textarea><br>
-							<p>景点2名称</p><br>
-        					<textarea rows="1" cols="30" name="stand_2_name" style="resize:none">{{ route.stand_2_name }}</textarea><br>
-							<p>游览日期2</p><br>
-        					<textarea rows="1" cols="30" name="date_2" style="resize:none">2000-1-1</textarea><br>
-						</div>
+						<div id="vp" style="position:absolute; top:35%;left: 10%;">
+							<p style="font-size:20px;color:white;background:#FFFFFF;color:#E0AD61;line-height:20px;">这是您可选择的景点。</p>
+							{% for viewspot in viewspot_list %}
+								<p style="margin-top:30px;">{{ viewspot.name }}</p>
+							{% endfor %}
+					    </div>
+						<div style="position:absolute; left: 30%;top:43%;width:100%">
+							<span>路线ID</span>>&ensp;&ensp;&nbsp;
+        					<textarea rows="1" cols="30" name="id" style="resize:none" readonly>{{ route.id }}</textarea>&ensp;&ensp;&ensp;&ensp;
+							<span>公司名称</span>>&ensp;&ensp;&ensp;&ensp;&ensp;
+        					<textarea rows="1" cols="30" name="company_name" style="resize:none" readonly>{{ route.company_name }}</textarea><br><br>
+        					<span>路线编号</span>>&nbsp;&nbsp;
+        					<textarea rows="1" cols="30" name="route_num" style="resize:none">{{ route.route_num }}</textarea>&ensp;&ensp;&ensp;&ensp;
+							<span>景点数量</span>>&ensp;&ensp;&ensp;&ensp;&ensp;
+        					<textarea rows="1" cols="30" name="stand_num" style="resize:none">{{ route.stand_num }}</textarea><br><br>
+        					<span>景点1名称</span>>
+        					<textarea rows="1" cols="30" name="stand_1_name" style="resize:none">{{ route.stand_1_name }}</textarea>&ensp;&ensp;&ensp;&ensp;
+							<span>景点1游览日期</span>>
+        					<textarea rows="1" cols="30" name="date_1" style="resize:none">2000-1-1</textarea><br><br>
+							<span>景点2名称</span>>
+        					<textarea rows="1" cols="30" name="stand_2_name" style="resize:none">{{ route.stand_2_name }}</textarea>&ensp;&ensp;&ensp;&ensp;
+							<span>景点2游览日期</span>>
+        					<textarea rows="1" cols="30" name="date_2" style="resize:none">2000-1-1</textarea><br><br>
 
-        				<div style="position:absolute; left: 50%;">
-							<p>景点3名称</p><br>
-        					<textarea rows="1" cols="30" name="stand_3_name" style="resize:none">{{ route.stand_3_name }}</textarea><br>
-							<p>游览日期3</p><br>
-        					<textarea rows="1" cols="30" name="date_3" style="resize:none">2000-1-1</textarea><br>
-							<p>景点4名称</p><br>
-        					<textarea rows="1" cols="30" name="stand_4_name" style="resize:none">{{ route.stand_4_name }}</textarea><br>
-							<p>游览日期4</p><br>
-        					<textarea rows="1" cols="30" name="date_4" style="resize:none">2000-1-1</textarea><br>
-							<p>路线价格</p><br>
-        					<textarea rows="1" cols="30" name="price" style="resize:none">{{ route.price }}</textarea><br>
-							<p>结束时间</p><br>
-        					<textarea rows="1" cols="30" name="end" style="resize:none">2000-1-1</textarea><br>
-        					<input type="submit" value="提交" style="margin-top:5%;">
+							<span>景点3名称</span>>
+        					<textarea rows="1" cols="30" name="stand_3_name" style="resize:none">{{ route.stand_3_name }}</textarea>&ensp;&ensp;&ensp;&ensp;
+							<span>游览日期3</span>>&ensp;&ensp;&ensp;&ensp;
+        					<textarea rows="1" cols="30" name="date_3" style="resize:none">2000-1-1</textarea><br><br>
+							<span>景点4名称</span>>
+        					<textarea rows="1" cols="30" name="stand_4_name" style="resize:none">{{ route.stand_4_name }}</textarea>&ensp;&ensp;&ensp;&ensp;
+							<span>游览日期4</span>>&ensp;&ensp;&ensp;&ensp;
+        					<textarea rows="1" cols="30" name="date_4" style="resize:none">2000-1-1</textarea><br><br>
+							<span>路线价格</span>>&nbsp;&nbsp;
+        					<textarea rows="1" cols="30" name="price" style="resize:none">{{ route.price }}</textarea>&ensp;&ensp;&ensp;&ensp;
+							<span>结束时间</span>>&ensp;&ensp;&ensp;&ensp;&ensp;
+        					<textarea rows="1" cols="30" name="end" style="resize:none">2000-1-1</textarea><br><br><br><br><br><br>
+												&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;
+						&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;
+        					<input type="submit" value="填好了"style="left:10%;height:50px;width:100px;background:#339999;border-radius:5px;cursor: pointer;border: 3px solid #339999;color:white;font-weight:400%;font-size:20px;">
 						</div>
 
 					</form>

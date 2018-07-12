@@ -4,16 +4,20 @@
 		<meta charset="utf-8" />
 		{% load staticfiles %}
 		<link rel="stylesheet" href="{% static 'css/addroute.css' %}" type="text/css" />
+		<link rel="SHORTCUT ICON" href="{% static "favicon.ico"%}">
 		<title>编辑景点</title>
+
 	</head>
 	<body>
+
 		<div class = "topmoudle"> 
-			<h1 class=p1>自助旅游系统</h1>
+			{% load staticfiles %}
+			<img src= "{% static "logo.jpg"%}"  alt="picture" align=left width="75" height="100%"/>
 
 			{% if user.is_authenticated %}
 			<form action="/logout" method="get">
-				<p class=username>{{ user.username }}</p>
-				<button class=p3 type="submit" style="background-color: #C0C0C0; color: #000000;">退出</button>
+				<p class=username style=" position:absolute;right:150px;top:5px;font-size:20px;font-weight:300;">{{ user.username }}公司</p>
+				<button class=p3 id="exit" onMouseOver='ChangeColor1()' onMouseout='RevertColor1()' type="submit" style="position: absolute;background:#339999;border-radius:5px;cursor: pointer;border: 3px solid #339999;top:8px;right: 10px;width: 100px;height: 55px;font-size: 20px;font-weight: 600;color: white;">退出</button>
 			</form>
 			{% else %}
 			<form action="/login" method="get">
@@ -25,56 +29,131 @@
 			{% endif %}
 		</div>
 		<div class = "middlemoudle">
+
 			<div class="rectangle1">
-				欢迎来到自助旅游系统
-				<p class=p6>添加路线</p>
+				<div class=route>一起来开始发布您的路线吧。</div>
 			</div>
 			<div class="rectangle2">
+                <img src= "{% static "flowers.png"%}"  alt="picture" top="-30%" style="position:absolute;right:110px;top:70px;"width="40%" height="650px"/>
 				<form action="/addroute/result" method="post">
 					{% csrf_token %}
-					<div style="position:absolute; left: 10%;">
+
+
+					<div class="smallwindow" id="out1">
+
+                        <div class="smalltop" id="out11">
+
+							<p>确保您景点数量与输入的一致</p>
+							<span rows="1" cols="15" style="font-size:15px;color:black;">超出了您景点个数的输入部分可以不填</span><br>
+						</div>
+
+						<div class="smalltop" id="out12"style="display:none">
+							<p>记得告诉我们您这条路线的价格</p>
+							<br>
+						</div>
+
+
+							<input type="button" id="btn1"onclick="hidetext1()"onMouseOver="ChangeColor0()" onmouseout="RevertColor0()" class="smallbottom" style="color:white;font-size:20px;"value="继续" >
+							<input type="button" id="btn2"onclick="hidetext2()"onMouseOver="ChangeColor0()" onmouseout="RevertColor0()"class="smallbottom" style="display:none;"value="下一步" /> <!--<input type="button" class="smallbottom" value="继续" style="hidden:display"</input>>-->
+
+					</div>
+
+					<div id="main"style="position:absolute; display:none;width:100%">
+						<div id="vp" style="position:absolute; top:-8%;left: 50%;">
+							<p style="font-size:20px;color:white;background:#E0AD61;line-height:20px;">这是您可选择的景点。</p>
 						{% for viewspot in viewspot_list %}
 							<p style="margin-top:30px;">{{ viewspot.name }}</p>
 						{% endfor %}
-					</div>
+					    </div>
+					    <span>公司名称</span>&thinsp;&thinsp;
 
-					<div style="position:absolute; left: 40%;">
-						<p>公司名称</p><br>
-						<textarea rows="1" cols="30" name="company_name" style="resize:none" readonly>{{ user.username }}</textarea><br>
-						<p>路线编号</p><br>
-						<textarea rows="1" cols="30" name="route_num" style="resize:none"></textarea><br>
-						<p>景点数量</p><br>
-						<textarea rows="1" cols="30" name="stand_num" style="resize:none"></textarea><br>
-						<p>景点1名称</p><br>
-						<textarea rows="1" cols="30" name="stand_1_name" style="resize:none"></textarea><br>
-						<p>游览日期1</p><br>
-						<textarea rows="1" cols="30" name="date_1" style="resize:none">2000-1-1</textarea><br>
-						<p>景点2名称</p><br>
-						<textarea rows="1" cols="30" name="stand_2_name" style="resize:none"></textarea><br>
-						<p>游览日期2</p><br>
-						<textarea rows="1" cols="30" name="date_2" style="resize:none">2000-1-1</textarea><br>
-					</div>
+						<textarea rows="1" cols="30" name="company_name" style="resize:none" readonly>{{ user.username }}</textarea>&nbsp&nbsp&nbsp
 
-					<div style="position:absolute; left: 70%;">
-						<p>景点3名称</p><br>
-						<textarea rows="1" cols="30" name="stand_3_name" style="resize:none"></textarea><br>
-						<p>游览日期3</p><br>
-						<textarea rows="1" cols="30" name="date_3" style="resize:none">2000-1-1</textarea><br>
-						<p>景点4名称</p><br>
-						<textarea rows="1" cols="30" name="stand_4_name" style="resize:none"></textarea><br>
-						<p>游览日期4</p><br>
-        					<textarea rows="1" cols="30" name="date_4" style="resize:none">2000-1-1</textarea><br>
-						<p>路线价格</p><br>
-        					<textarea rows="1" cols="30" name="price" style="resize:none"></textarea><br>
-						<p>结束时间</p><br>
-        					<textarea rows="1" cols="30" name="end" style="resize:none">2000-1-1</textarea><br>
-						<input type="submit" value="提交">
-						<p>{{ rlt }}</p>
+						<span>路线编号</span>
+						<textarea rows="1" cols="30" name="route_num" style="resize:none"></textarea><br><br>
+
+						<span>景点数量&thinsp;&thinsp; </span>
+						<textarea rows="1" cols="30" name="stand_num" style="resize:none"></textarea><br><br><br>
+
+						<span>景点1名称</span>
+						<textarea rows="1" cols="30" name="stand_1_name" style="resize:none"></textarea>
+						<span>游览日期1</span>
+						<textarea rows="1" cols="30" name="date_1" style="resize:none">2000-1-1</textarea><br><br><br>
+						<span>景点2名称</span>
+						<textarea rows="1" cols="30" name="stand_2_name" style="resize:none"></textarea>
+						<span>游览日期2</span>
+						<textarea rows="1" cols="30" name="date_2" style="resize:none">2000-1-1</textarea><br><br><br>
+
+						<span>景点3名称</span>
+						<textarea rows="1" cols="30" name="stand_3_name" style="resize:none"></textarea>
+						<span>游览日期3</span>
+						<textarea rows="1" cols="30" name="date_3" style="resize:none">2000-1-1</textarea><br><br><br>
+						<span>景点4名称</span>
+						<textarea rows="1" cols="30" name="stand_4_name" style="resize:none"></textarea>
+						<span>游览日期4</span>
+        					<textarea rows="1" cols="30" name="date_4" style="resize:none">2000-1-1</textarea><br><br><br>
+						<span>路线价格&thinsp;&thinsp;</span>
+        					<textarea rows="1" cols="30" name="price" style="resize:none"></textarea>
+						<span>结束时间&thinsp;&thinsp;</span>
+        					<textarea rows="1" cols="30" name="end" style="resize:none">2000-1-1</textarea><br><br><br><br>
+						&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;
+						&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;
+						<input id="finished" type="submit" onMouseOver="ChangeColor0()" onmouseout="RevertColor0()" value="填好了"style="left:100px;height:50px;width:100px;background:#339999;border-radius:5px;cursor: pointer;border: 3px solid #339999;color:white;font-weight:400%;font-size:20px;">
 					</div>
 				</form>
-
+				<p>{{ rlt }}</p>
 			</div>
 		</div>
 		<div class = "buttommoudle"> </div>
 	</body>
+
+	<script type="text/javascript">
+
+    function hidetext1()
+    {
+    var divs=document.getElementById("out11").style.display="none";
+    var divs1=document.getElementById("out12").style.display="";
+    var btn1=document.getElementById("btn1").style.display="none";
+    var btn2=document.getElementById("btn2").style.display="";
+     }
+    function hidetext2()
+    {
+    var divsout=document.getElementById("out1").style.display="none";
+    var divM=document.getElementById("main").style.display="";
+     var divM2=document.getElementById("main2").style.display="";
+     var divvp=document.getElementById("vp").style.display="";
+     }
+
+  function ChangeColor0()
+ {
+  document.getElementById('btn1').style.backgroundColor="#0e6464";
+  document.getElementById('btn1').style.borderColor="#0e6464";
+    document.getElementById('btn2').style.backgroundColor="#0e6464";
+  document.getElementById('btn2').style.borderColor="#0e6464";
+   document.getElementById('finished').style.backgroundColor="#0e6464";
+  document.getElementById('finished').style.borderColor="#0e6464";
+ }
+ function RevertColor0()
+ {
+  document.getElementById('btn1').style.backgroundColor="#339999";
+  document.getElementById('btn1').style.borderColor="#339999";
+    document.getElementById('btn2').style.backgroundColor="#339999";
+  document.getElementById('btn2').style.borderColor="#339999";
+     document.getElementById('finished').style.backgroundColor="#339999";
+  document.getElementById('finished').style.borderColor="#339999";
+ }
+
+   function ChangeColor1()
+ {
+  document.getElementById('exit').style.backgroundColor="#0e6464";
+  document.getElementById('exit').style.borderColor="#0e6464";
+
+ }
+ function RevertColor1()
+ {
+  document.getElementById('exit').style.backgroundColor="#339999";
+  document.getElementById('exit').style.borderColor="#339999";
+
+ }
+    </script>
 </html>
