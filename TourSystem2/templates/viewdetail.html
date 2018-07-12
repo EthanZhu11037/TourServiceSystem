@@ -47,7 +47,7 @@
 					<p>{{ rlt }}</p>
 					{% if user.is_adminis == True %}
 						<p class=p5>预约情况</p>
-						<p class=p5>日期&emsp;&emsp;预计人数</p>
+						<p class=p5>日期&emsp;&emsp;预计人数</p><br>
 						{% for va in va_list %}
 							<p>{{ va.date }}&emsp;&emsp;{{ va.person_num }}</p>
 						{% endfor %}
