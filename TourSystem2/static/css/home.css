@@ -20,11 +20,12 @@ body{
 	margin: 1% 1% 1% 1%;
 	height:81%;
 	width:98%;
-	background-color: white;
+	background: transparent;
 	border-style:inset;
 	border-color:#D9D9D9;
-	opacity:0.8;
+	opacity:1;
 	text-align: center;
+	position:relative;
 }
 
 .buttommoudle{
@@ -57,17 +58,19 @@ body{
     margin: 5% 30% 0%;
 	height:44%;
 	width:40%;
-	color: white;
+	color: #E9B973;
 	font-weight:700;
-	background-color: #E9B973;
-	opacity:0.5;
+	background-color: white;
+	opacity:0.9;
 	border-radius:10px;
 	text-align: center;
+	border-style:solid;
+    border-color:#DEDEDE;
 }
 
 .p4{
 	position:absolute;
-	top:35%;
+	top:28%;
 	left:40%;
 	font-weight:700;		/*字体加粗*/
 }
@@ -75,7 +78,7 @@ body{
 
 
 .button {
-    background-color: #E9B973; 
+    background-color: white; 
 	font-weight:700;
 	font-size:200%;
     border: none;
@@ -85,7 +88,9 @@ body{
     text-decoration: none;
     display: inline-block;
 	border-radius:10px;
-	opacity:0.5;
+	opacity:0.9;
+	border-style:solid;
+    border-color:#DEDEDE;
 }
 
 .button1 {

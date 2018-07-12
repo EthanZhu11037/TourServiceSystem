@@ -20,12 +20,13 @@ body{
 	margin: 1% 1% 1% 1%;
 	height:81%;
 	width:98%;
-	background-color: #E0AD61;
+	background: transparent;
 	border-style:inset;
-	border-color:#D9D9D9;
-	opacity:0.6;
-
+	opacity:1;
+	text-align: center;
+	position:relative;
 }
+
 
 .buttommoudle{
 	margin-up:85%;
@@ -54,7 +55,7 @@ body{
 	color:black;
 	font-weight:700;
 	background-color: #FFFFFF;
-	opacity:0.8;
+	opacity:0.9;
 	border-radius:20px;
 }
 
@@ -80,7 +81,7 @@ body{
     text-decoration: none;
     display: inline-block;
 	border-radius:10px;
-	opacity:0.5;
+	opacity:0.9;
 }
 
 
