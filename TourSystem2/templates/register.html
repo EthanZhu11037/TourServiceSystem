@@ -74,8 +74,8 @@
 				<div class="rectangle2">
 					<form action="/regist/result" method="post">
 						{% csrf_token %}
-						账号:<input class="input" type="text" name="username" value="此处输入注册账号的要求"><br><br>
-						密码:<input class="input" type="text" name="password" value="此处输入密码的要求"><br><br>
+						账号:<input class="input" type="text" name="username"><br><br>
+						密码:<input class="input" type="text" name="password"><br><br>
 						用户类型:<input checked="true" type="radio" name="usertype" value="tourist">游客
         				<input type="radio" name="usertype" value="company">旅游公司人员
         				<input type="radio" name="usertype" value="adminis">旅游局人员<br><br><br>

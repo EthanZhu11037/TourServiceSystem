@@ -47,6 +47,7 @@
 				<p>公司名称&emsp;&emsp;路线编号&emsp;&emsp;</p>
 				{% for ra in ra_list %}
 					<p>{{ ra.company_name }}&emsp;&emsp;{{ ra.route_num }}</p>
+					<a href="{% url 'delete_appointment' id=ra.id %}">删除</a>
 				{% endfor %}
 			</div>
 

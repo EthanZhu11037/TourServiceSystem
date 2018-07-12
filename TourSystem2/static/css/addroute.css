@@ -52,6 +52,14 @@ body{
 	color:#fff;
 }
 
+.mainpg{
+	position:absolute;
+	left: 81%;
+	top: 2.5%;
+	font-weight:300;		/*字体粗细*/
+	color:#fff;
+}
+
 .p3{
 	position:absolute;
 	left: 85%;

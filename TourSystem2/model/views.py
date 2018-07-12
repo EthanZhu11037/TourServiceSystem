@@ -26,8 +26,20 @@ def regist_result(request):
     username = request.POST['username']
     password = request.POST['password']
 
-    if username == "" or password == "":
-        ctx['rlt'] = "用户名或密码为空"
+    if len(username) < 6:
+        ctx['rlt'] = "用户名长度过短"
+        return render(request, 'register.html', ctx)
+    if len(username) > 100:
+        ctx['rlt'] = "用户名长度过长"
+        return render(request, 'register.html', ctx)
+    if len(password) < 6:
+        ctx['rlt'] = "密码长度过短"
+        return render(request, 'register.html', ctx)
+    if len(password) > 20:
+        ctx['rlt'] = "密码长度过长"
+        return render(request, 'register.html', ctx)
+    if not username.isalpha() and not username.isalnum():
+        ctx['rlt'] = "用户名有特殊字符"
         return render(request, 'register.html', ctx)
 
     try:
@@ -69,6 +81,14 @@ def login_result(request):
         ctx['rlt'] = "用户名或密码错误"
         return render(request, 'login.html', ctx)
 
+def rt_home(request):
+    if request.user.is_company == True:
+        return redirect('/route', {'user': request.user})
+    elif request.user.is_adminis == True:
+        return redirect('/view', {'user': request.user})
+    else:
+        return redirect('/tourist', {'user': request.user})
+
 def logout(request):
     auth.logout(request)
     return render(request,'home.html')
@@ -88,6 +108,27 @@ def addview_result(request):
     intro = request.POST['intro']
     time = request.POST['time']
     price = request.POST['price']
+
+    if name == "":
+        ctx['rlt'] = "景点名称不能为空"
+        return render(request, 'addviewinfo.html', ctx)
+
+    if price == "":
+        ctx['rlt'] = "门票价格不能为空  若无门票请填入 0"
+        return render(request, 'addviewinfo.html', ctx)
+    try:
+        f = float(price)
+    except ValueError:
+        ctx['rlt'] = "门票价格输入格式有误"
+        return render(request, 'addviewinfo.html', ctx)
+    else:
+        if f < 0:
+            ctx['rlt'] = "门票价格为负数"
+            return render(request, 'addviewinfo.html', ctx)
+        f_test = round(f,2)
+        if f_test != f:
+            ctx['rlt'] = "门票价格精确度超过“分”"
+            return render(request, 'addviewinfo.html', ctx)
 
     try:
         ViewSpot.objects.get(name=name)
@@ -170,6 +211,37 @@ def addroute_result(request):
     price = request.POST['price']
     end = request.POST['end']
 
+    if route_num == "":
+        ctx['rlt'] = "路线编号不能为空"
+        return render(request, 'addroute.html', ctx)
+
+    if stand_num == "":
+        ctx['rlt'] = "景点数量不能为空"
+        return render(request, 'addroute.html', ctx)
+    if not stand_num.isdigit():
+        ctx['rlt'] = "景点数量不是数字"
+        return render(request, 'addroute.html', ctx)
+    if int(stand_num) < 1 or int(stand_num) > 4:
+        ctx['rlt'] = "景点数量超出范围（1-4）"
+        return render(request, 'addroute.html', ctx)
+
+    if price == "":
+        ctx['rlt'] = "路线价格不能为空  若免费请填入 0"
+        return render(request, 'addroute.html', ctx)
+    try:
+        f = float(price)
+    except ValueError:
+        ctx['rlt'] = "路线价格输入格式有误"
+        return render(request, 'addroute.html', ctx)
+    else:
+        if f < 0:
+            ctx['rlt'] = "路线价格为负数"
+            return render(request, 'addroute.html', ctx)
+        f_test = round(f,2)
+        if f_test != f:
+            ctx['rlt'] = "路线价格精确度超过“分”"
+            return render(request, 'addroute.html', ctx)
+
     try:
         Route.objects.get(company_name=company_name, route_num=route_num)
     except Route.DoesNotExist:
@@ -215,8 +287,7 @@ def make_appointment(request, id):
         ra = RouteAppointment(company_name=company_name, route_num=route_num, tourist_name=tourist_name)
         ra.save()
         item = Route.objects.get(company_name=company_name, route_num=route_num)
-        new_num = item.person_num
-        new_num = new_num + 1
+        new_num = item.person_num + 1
         item.person_num = new_num
         item.save()
 
@@ -227,8 +298,40 @@ def make_appointment(request, id):
                 va = ViewAppointment(view_name=item.stand_1_name, date=item.date_1, person_num=1)
                 va.save()
             else:
-                num = raw.person_num
-                num = num + 1
+                num = raw.person_num + 1
+                raw.person_num = num
+                raw.save()
+
+        if item.stand_2_name != '':
+            try:
+                raw = ViewAppointment.objects.get(view_name=item.stand_2_name, date=item.date_2)
+            except ViewAppointment.DoesNotExist:
+                va = ViewAppointment(view_name=item.stand_2_name, date=item.date_2, person_num=1)
+                va.save()
+            else:
+                num = raw.person_num + 1
+                raw.person_num = num
+                raw.save()
+
+        if item.stand_3_name != '':
+            try:
+                raw = ViewAppointment.objects.get(view_name=item.stand_3_name, date=item.date_3)
+            except ViewAppointment.DoesNotExist:
+                va = ViewAppointment(view_name=item.stand_3_name, date=item.date_3, person_num=1)
+                va.save()
+            else:
+                num = raw.person_num + 1
+                raw.person_num = num
+                raw.save()
+
+        if item.stand_4_name != '':
+            try:
+                raw = ViewAppointment.objects.get(view_name=item.stand_4_name, date=item.date_4)
+            except ViewAppointment.DoesNotExist:
+                va = ViewAppointment(view_name=item.stand_4_name, date=item.date_4, person_num=1)
+                va.save()
+            else:
+                num = raw.person_num + 1
                 raw.person_num = num
                 raw.save()
 
@@ -267,8 +370,60 @@ def edit_route_result(request):
     return render(request, 'route.html',{'route_list': route_list})
 
 def delete_route(request, id):
-    Route.objects.filter(id=id).delete()
+    r = Route.objects.get(id=id)
+    ra_list = RouteAppointment.objects.filter(company_name=r.company_name, route_num=r.route_num)
+    for ra in ra_list:
+        ra.delete()
+    r.delete()
     company_name = request.user.username
     route_list = Route.objects.filter(company_name=company_name).order_by('route_num')
     # !!!!!!少提示!!!!!!
     return render(request, 'route.html', {'route_list': route_list})
+
+def delete_appointment(request, id):
+    ra = RouteAppointment.objects.get(id=id)
+    # !!!!!!少提示!!!!!!
+    route = Route.objects.get(company_name=ra.company_name, route_num=ra.route_num)
+    num = route.person_num - 1
+    route.person_num = num
+
+    if route.stand_1_name != '':
+        va1 = ViewAppointment.objects.get(view_name=route.stand_1_name, date=route.date_1)
+        person_num = va1.person_num - 1
+        if person_num == 0:
+            va1.delete()
+        else:
+            va1.person_num = person_num
+            va1.save()
+    if route.stand_2_name != '':
+        va2 = ViewAppointment.objects.get(view_name=route.stand_2_name, date=route.date_2)
+        person_num = va2.person_num - 1
+        if person_num == 0:
+            va2.delete()
+        else:
+            va2.person_num = person_num
+            va2.save()
+    if route.stand_3_name != '':
+        va3 = ViewAppointment.objects.get(view_name=route.stand_3_name, date=route.date_3)
+        person_num = va3.person_num - 1
+        if person_num == 0:
+            va3.delete()
+        else:
+            va3.person_num = person_num
+            va3.save()
+    if route.stand_4_name != '':
+        va4 = ViewAppointment.objects.get(view_name=route.stand_4_name, date=route.date_4)
+        person_num = va4.person_num - 1
+        if person_num == 0:
+            va4.delete()
+        else:
+            va4.person_num = person_num
+            va4.save()
+
+    route.save()
+    ra.delete()
+
+    route_list = Route.objects.all()
+    tourist_name = request.user.username
+    ra_list = RouteAppointment.objects.filter(tourist_name=tourist_name)
+    return render(request, 'route_tourist.html',{'route_list': route_list, 'ra_list': ra_list})

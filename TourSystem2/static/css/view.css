@@ -25,7 +25,7 @@ body{
 	border-style:inset;
 	border-color:#D9D9D9;
 	opacity:0.6;
-
+	overflow:auto;
 }
 
 .buttommoudle{
@@ -79,6 +79,10 @@ body{
 	font-weight:700;
 	color:#E0AD61;
 	line-height:10px;
+}
+
+.rectangle4{
+	
 }
 
 .p4{
@@ -174,3 +178,11 @@ body{
 	border-radius:10px;
 	opacity:0.8;
 }
+
+ table.gridtable {
+        border-width: 0.5px;
+        padding: 8px;
+        border-style:inset;
+        border-color: #666666;
+        background-color: white;
+      }

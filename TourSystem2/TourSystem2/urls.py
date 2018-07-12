@@ -21,6 +21,7 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$',views.home),
     url(r'^home$',views.home),
+    url(r'^rt/home$',views.rt_home),
     url(r'^regist$',views.regist),
     url(r'^regist/result$',views.regist_result),
     url(r'^login$',views.login),
@@ -46,4 +47,5 @@ urlpatterns = [
     url(r'^tourist/route$', views.route2, name='tourist_route'),
     url(r'^tourist/route/detail/(?P<id>\d+)$',views.route_detail_tourist, name='route_detail_tourist'),
     url(r'^tourist/route/mkap/(?P<id>\d+)$',views.make_appointment, name='make_appointment'),
+    url(r'^tourist/route/delete/(?P<id>\d+)$',views.delete_appointment, name='delete_appointment'),
 ]

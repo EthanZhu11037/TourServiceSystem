@@ -148,3 +148,11 @@ body{
 	text-align: center;
 	border-radius:10px;
 }
+
+.mainpg{
+	position:absolute;
+	left: 81%;
+	top: 2.5%;
+	font-weight:300;		/*字体粗细*/
+	color:#fff;
+}

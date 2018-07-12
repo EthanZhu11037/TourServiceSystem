@@ -47,7 +47,12 @@
 				
 			
 			<table class="gridtable" margin-left="10%" width="50%" height="300px" border="3px"   id="tad">  
-				<tr><td>景点名称</td><td>是否修改</td><td>是否删除</td></tr>  
+				{% if user.is_adminis == True %}
+					<tr><td>景点名称</td><td>是否修改</td><td>是否删除</td></tr>
+				{% endif %}
+				{% if user.is_tourist == True %}
+					<tr><td>景点名称</td></tr>
+				{% endif %}
 				{% for viewspot in viewspot_list %}
 				<tr>
 					<td><a href="{% url 'viewspot_detail' id=viewspot.id %}">{{ viewspot.name }}</a></td>
